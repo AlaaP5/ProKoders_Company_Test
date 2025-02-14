@@ -20,7 +20,7 @@ class RolesPermissionsSeeder extends Seeder
         // define permissions
         $permissions = [
             'login', 'logout', 'create_user', 'get_user', 'update_user', 'delete_user', 'get_users',
-            'create_task', 'get_task', 'update_task', 'delete_task',
+            'create_task', 'get_task', 'update_task', 'delete_task', 'get_tasks',
             'create_subTask', 'get_subTask', 'update_subTask', 'delete_subTask'
         ];
 

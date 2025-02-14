@@ -6,6 +6,10 @@ use App\Modules\SharedModule\Auth\Repository\AuthRepository;
 use App\Modules\SharedModule\Auth\Repository\AuthRepositoryInterface;
 use App\Modules\SharedModule\Auth\Services\AuthService;
 use App\Modules\SharedModule\Auth\Services\AuthServiceInterface;
+use App\Modules\TaskManagementModule\Repository\TaskRepository;
+use App\Modules\TaskManagementModule\Repository\TaskRepositoryInterface;
+use App\Modules\TaskManagementModule\Services\TaskService;
+use App\Modules\TaskManagementModule\Services\TaskServiceInterface;
 use App\Modules\UserManagementModule\Repository\UserRepository;
 use App\Modules\UserManagementModule\Repository\UserRepositoryInterface;
 use App\Modules\UserManagementModule\Services\UserService;
@@ -26,6 +30,13 @@ class AppServiceProvider extends ServiceProvider
         /**UserManagement*/
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
+        /**TaskManagement*/
+        $this->app->bind(TaskServiceInterface::class, TaskService::class);
+        $this->app->bind(TaskRepositoryInterface::class, TaskRepository::class);
+
+        /**SubTaskManagement*/
+        
     }
 
     /**
