@@ -31,7 +31,7 @@ class RolesPermissionsSeeder extends Seeder
 
         $admin_role->syncPermissions($permissions);
 
-        $employee_role->givePermissionTo(['create_subTask', 'get_subTask', 'update_subTask', 'delete_subTask', 'login']);
+        $employee_role->givePermissionTo(['get_subTask', 'update_subTask', 'login', 'logout']);
 
 
         $admin_user = User::create([

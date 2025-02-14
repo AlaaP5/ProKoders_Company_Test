@@ -2,12 +2,15 @@
 
 namespace App\Modules\UserManagementModule\Repository;
 use  App\Modules\SharedModule\Auth\Models\User;
+use App\Modules\UserManagementModule\Models\AddUpdateUserDto;
 
 interface UserRepositoryInterface
 {
-    function createUser(string $name,string $email, string $password): User;
+    function createUser(AddUpdateUserDto $dto): User;
     function getAllUsers(int $page = 1 ,int $pageSize = 10, string $name) :array;
-    function deleteUser();
+    function deleteUser(int $id): bool;
+    function getUser(int $id): User;
+    function updateUser(AddUpdateUserDto $dto): User;
 
 
     function getRoleEmployee();

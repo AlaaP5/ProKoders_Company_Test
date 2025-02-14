@@ -4,8 +4,10 @@ namespace App\Modules\UserManagementModule\Services;
 
 use App\Modules\SharedModule\Auth\Repository\AuthRepositoryInterface;
 use App\Modules\SharedModule\ResponseModels\ApiResponse;
+use App\Modules\UserManagementModule\Models\AddUpdateUserDto;
 use App\Modules\UserManagementModule\Repository\UserRepositoryInterface;
 use App\Modules\UserManagementModule\Services\UserServiceInterface;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 
@@ -14,10 +16,10 @@ class UserService implements UserServiceInterface
 
     public function __construct(private UserRepositoryInterface $userRepository, private AuthRepositoryInterface $authRepository) {}
 
-    function createUser(string $name, string $email, string $password): ApiResponse
+    function createUser(AddUpdateUserDto $dto): ApiResponse
     {
         try {
-            $user = $this->userRepository->createUser($name, $email, $password);
+            $user = $this->userRepository->createUser($dto);
 
             $employeeRole = $this->userRepository->getRoleEmployee();
 
@@ -42,13 +44,43 @@ class UserService implements UserServiceInterface
         }
     }
 
+
     function deleteUser(int $id): ApiResponse
     {
         try {
-
-            return ApiResponse::success('', __('shared.success'));
+            $result = $this->userRepository->deleteUser($id);
+            return ApiResponse::success($result, __('shared.success'));
 
         } catch (Throwable $e) {
+            return ApiResponse::error(__('shared.general_error'));
+        }
+    }
+
+    function getUser(int $id): ApiResponse
+    {
+        try {
+            if((Auth::user()->hasRole('employee') && Auth::id() === $id) || Auth::user()->hasRole('admin')) {
+                $result = $this->userRepository->getUser($id);
+
+            } else {
+                $result = null;
+            }
+            return ApiResponse::success($result, __('shared.success'));
+
+        } catch (Throwable $e) {
+            return ApiResponse::error(__('shared.general_error'));
+        }
+
+    }
+
+    function updateUser(AddUpdateUserDto $dto): ApiResponse
+    {
+        try{
+            $user = $this->userRepository->updateUser($dto);
+
+            return ApiResponse::success($user, __('shared.success'));
+
+        } catch(Throwable $e) {
             return ApiResponse::error(__('shared.general_error'));
         }
     }

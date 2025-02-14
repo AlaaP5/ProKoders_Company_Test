@@ -9,15 +9,13 @@ use Throwable;
 class AuthService implements AuthServiceInterface
 {
 
-
-
     public function __construct(protected AuthRepositoryInterface $authRepository) {}
 
     function login(string $email, string $password): ApiResponse
     {
         try {
-
             $result = $this->authRepository->login($email, $password);
+
             if (empty($result)) {
                 return ApiResponse::error(__('auth.invalid_credentials'));
             }

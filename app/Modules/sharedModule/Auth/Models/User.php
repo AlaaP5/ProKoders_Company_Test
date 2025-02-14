@@ -5,6 +5,8 @@ namespace App\Modules\SharedModule\Auth\Models;
 
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Modules\TaskManagementModule\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -37,7 +39,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'email_verified_at'
     ];
 
     /**

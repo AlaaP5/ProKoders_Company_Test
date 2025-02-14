@@ -3,6 +3,7 @@
 namespace App\Modules\UserManagementModule\Repository;
 
 use  App\Modules\SharedModule\Auth\Models\User;
+use App\Modules\UserManagementModule\Models\AddUpdateUserDto;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -10,15 +11,13 @@ class UserRepository implements UserRepositoryInterface
 {
     public function __construct(protected User $userModel) {}
 
-    function createUser(string $name, string $email, string $password): User
-    {
 
-        return $this->userModel->create([
-            'name' => $name,
-            'email' => $email,
-            'password' => Hash::make($password)
-        ]);
+    function createUser(AddUpdateUserDto $dto): User
+    {
+        $dto->password = Hash::make($dto->password);
+        return $this->userModel->create($dto->toArray());
     }
+
 
     function getAllUsers(int $page = 1, int $pageSize = 10, string $name = null): array
     {
@@ -32,9 +31,26 @@ class UserRepository implements UserRepositoryInterface
         return $query->paginate($pageSize,  ['*'], 'page', $page)->toArray();
     }
 
-    function deleteUser()
+
+    function deleteUser(int $id): bool
     {
-        
+        return $this->userModel->findOrFail($id)->delete();
+    }
+
+
+    function getUser(int $id): User
+    {
+        return $this->userModel->findOrFail($id);
+    }
+
+    function updateUser(AddUpdateUserDto $dto): User
+    {
+        $user = $this->getUser($dto->user_id);
+
+        $dto->password = Hash::make($dto->password);
+        $user->update($dto->toArray());
+
+        return $user;
     }
 
 

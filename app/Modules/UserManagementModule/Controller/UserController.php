@@ -3,8 +3,10 @@
 namespace App\Modules\UserManagementModule\Controller;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeleteUserRequest;
+use App\Modules\UserManagementModule\Models\AddUpdateUserDto;
 use App\Modules\UserManagementModule\Requests\CreateUserRequest;
+use App\Modules\UserManagementModule\Requests\DeleteUserRequest;
+use App\Modules\UserManagementModule\Requests\UpdateUserRequest;
 use App\Modules\UserManagementModule\Services\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +20,7 @@ class UserController extends Controller
     public function createUser(CreateUserRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        return $this->userService->createUser($validated['name'], $validated['email'], $validated['password'])->toJsonResponse();
+        return $this->userService->createUser(new AddUpdateUserDto($validated))->toJsonResponse();
     }
 
     public function getAllUsers(Request $request): JsonResponse
@@ -30,5 +32,17 @@ class UserController extends Controller
     {
         $validated = $request->validated();
         return $this->userService->deleteUser($validated['user_id'])->toJsonResponse();
+    }
+
+    public function getUser(DeleteUserRequest $request) : JsonResponse
+    {
+        $validated = $request->validated();
+        return $this->userService->getUser($validated['user_id'])->toJsonResponse();
+    }
+
+    public function updateUser(UpdateUserRequest $request) : JsonResponse
+    {
+        $validated = $request->validated();
+        return $this->userService->updateUser(new AddUpdateUserDto($validated))->toJsonResponse();
     }
 }
