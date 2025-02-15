@@ -27,7 +27,7 @@ class SendMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Code Mail To Employee',
+            subject: 'Tasks Management',
         );
     }
 
@@ -44,7 +44,7 @@ class SendMail extends Mailable
 
     public function build()
     {
-        return $this->from('alaa3012002@gmail.com','Tasks Management')->view('post');
+        return $this->from('alaa3012002@gmail.com','ProKoders')->view('post');
     }
     /**
      * Get the attachments for the message.

@@ -9,12 +9,12 @@ class AddUpdateTaskDto
     public string $description;
     public string $user_id;
 
+
     public function __construct(array $validated) {
         $this->task_id = $validated['task_id'] ?? null;
         $this->title = $validated['title'];
         $this->description = $validated['description'];
         $this->user_id = $validated['user_id'];
-
     }
 
     public function toArray(): array

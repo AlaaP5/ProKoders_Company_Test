@@ -21,7 +21,7 @@ class UserRepository implements UserRepositoryInterface
 
     function getAllUsers(int $page = 1, int $pageSize = 10, string $name = null): array
     {
-        $query =  $this->userModel->with(['roles:name', 'permissions:name'])->select(['id', 'name', 'email'])->newQuery();
+        $query =  $this->userModel->select(['id', 'name', 'email'])->newQuery();
 
         if ($name) {
             $query->where('name', 'like', "%{$name}%");

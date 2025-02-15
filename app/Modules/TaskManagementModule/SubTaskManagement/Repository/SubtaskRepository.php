@@ -4,6 +4,7 @@ namespace App\Modules\TaskManagementModule\SubtaskManagement\Repository;
 
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\AddSubtaskDto;
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\Subtask;
+use Illuminate\Support\Facades\Cache;
 
 class SubtaskRepository implements SubtaskRepositoryInterface
 {
@@ -12,6 +13,7 @@ class SubtaskRepository implements SubtaskRepositoryInterface
 
     public function createSubtask(AddSubtaskDto $dto): Subtask
     {
+        Cache::flush();
         return $this->subtaskModel->create($dto->toArray());
     }
 
@@ -24,6 +26,7 @@ class SubtaskRepository implements SubtaskRepositoryInterface
 
     public function deleteSubtask(int $id): bool
     {
+        Cache::flush();
         return $this->subtaskModel->findOrFail($id)->delete();
     }
 
@@ -35,7 +38,8 @@ class SubtaskRepository implements SubtaskRepositoryInterface
 
         $subtask->status = $status;
         $subtask->save();
-        
+
+        Cache::flush();
         return $subtask;
     }
 }
