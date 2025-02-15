@@ -7,6 +7,7 @@ use App\Modules\TaskManagementModule\TaskManagement\Models\AddUpdateTaskDto;
 use App\Modules\TaskManagementModule\TaskManagement\Models\FilterTaskDto;
 use App\Modules\TaskManagementModule\TaskManagement\Repository\TaskRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class TaskService implements TaskServiceInterface
@@ -30,6 +31,10 @@ class TaskService implements TaskServiceInterface
             return ApiResponse::success($tasks['data'], __('shared.success'), $tasks['total'], $tasks['current_page']);
 
         } catch (Throwable $e) {
+            Log::error('Error fetching tasks: ' . $e->getMessage(), [
+                'exception' => $e,
+                'dto' => $dto
+            ]);
             return ApiResponse::error(__('shared.general_error'));
         }
     }

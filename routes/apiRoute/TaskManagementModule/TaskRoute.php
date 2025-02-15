@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\TaskManagementModule\Controller\TaskController;
+use App\Modules\TaskManagementModule\TaskManagement\Controller\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {

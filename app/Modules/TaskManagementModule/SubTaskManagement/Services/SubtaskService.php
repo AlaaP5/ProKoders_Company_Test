@@ -2,14 +2,14 @@
 
 namespace App\Modules\TaskManagementModule\SubtaskManagement\Services;
 
-
+use App\Events\SubtaskStatusUpdated;
 use App\Modules\SharedModule\ResponseModels\ApiResponse;
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\AddSubtaskDto;
 use App\Modules\TaskManagementModule\SubtaskManagement\Repository\SubtaskRepositoryInterface;
-use App\TaskManagementModule\Events\SubtaskStatusUpdatedEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 
 class SubtaskService implements SubtaskServiceInterface
 {
@@ -62,13 +62,13 @@ class SubtaskService implements SubtaskServiceInterface
         try {
             $subtask_user_id = $this->subtaskRepository->getSubtask($id)->task->user_id;
 
-            if((Auth::user()->hasRole('employee') && Auth::id() === $subtask_user_id) || Auth::user()->hasRole('admin')) {
-                $subtask = $this->subtaskRepository->updateSubtask($id, $status);
 
+            if((Auth::user()->hasRole('employee') && Auth::id() === $subtask_user_id) || Auth::user()->hasRole('admin')) {
+
+                $subtask = $this->subtaskRepository->updateSubtask($id, $status);
                 $subtask = $subtask->makeHidden('task');
 
-                Event::dispatch(new SubtaskStatusUpdatedEvent($subtask));
-
+                Event::dispatch(new SubtaskStatusUpdated($subtask));
                 DB::commit();
 
             } else {
@@ -78,6 +78,7 @@ class SubtaskService implements SubtaskServiceInterface
             return ApiResponse::success($subtask, __('shared.success'));
 
         } catch (\Throwable $e) {
+
             DB::rollBack();
             return ApiResponse::error(__('shared.general_error'));
         }

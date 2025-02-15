@@ -35,7 +35,7 @@ class SubtaskRepository implements SubtaskRepositoryInterface
 
         $subtask->status = $status;
         $subtask->save();
-
+        
         return $subtask;
     }
 }

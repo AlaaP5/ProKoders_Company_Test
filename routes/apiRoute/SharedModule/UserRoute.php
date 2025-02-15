@@ -1,8 +1,7 @@
 <?php
 
+use App\Modules\SharedModule\UserManagement\Controller\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Modules\UserManagementModule\Controller\UserController;
-
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('users')->group(function () {

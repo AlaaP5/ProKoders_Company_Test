@@ -1,6 +1,6 @@
 <?php
 
-namespace App\TaskManagementModule\Mail;
+namespace App\Modules\TaskManagementModule\Mail;
 
 use App\Modules\TaskManagementModule\TaskManagement\Models\Task;
 use Illuminate\Bus\Queueable;

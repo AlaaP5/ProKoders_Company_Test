@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\SubtaskManagementModule\Controller\SubtaskController;
+use App\Modules\TaskManagementModule\SubtaskManagement\Controller\SubtaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {

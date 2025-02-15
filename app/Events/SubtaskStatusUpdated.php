@@ -1,6 +1,6 @@
 <?php
 
-namespace App\TaskManagementModule\Events;
+namespace App\Events;
 
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\Subtask;
 use Illuminate\Broadcasting\Channel;
@@ -11,14 +11,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SubtaskStatusUpdatedEvent
+class SubtaskStatusUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public Subtask $subtask) {}
+    public function __construct(public Subtask $subtask)
+    {
+        //
+    }
 
     /**
      * Get the channels the event should broadcast on.

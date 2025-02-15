@@ -1,9 +1,9 @@
 <?php
 
-namespace App\TaskManagementModule\Jobs;
+namespace App\Modules\TaskManagementModule\Jobs;
 
+use App\Modules\TaskManagementModule\Mail\SendMail;
 use App\Modules\TaskManagementModule\TaskManagement\Models\Task;
-use App\TaskManagementModule\Mail\SendMail;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;

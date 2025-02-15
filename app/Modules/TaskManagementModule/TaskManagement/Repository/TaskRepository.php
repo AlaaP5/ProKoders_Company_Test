@@ -22,11 +22,11 @@ class TaskRepository implements TaskRepositoryInterface
 
     function getAllTasks(FilterTaskDto $dto): array
     {
-
         $cacheKey = 'tasks_' . md5(json_encode($dto));
 
+
         $tasks = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($dto) {
-            $query = $this->taskModel->with('subtasks:title,status')->newQuery();
+            $query = $this->taskModel->with('subtasks:details,status')->newQuery();
 
             if ($dto->title) {
                 $query->where('title', 'like', "%{$dto->title}%");
@@ -38,6 +38,7 @@ class TaskRepository implements TaskRepositoryInterface
 
             return $query->paginate($dto->pageSize, ['*'], 'page', $dto->page)->toArray();
         });
+
 
         return $tasks;
     }

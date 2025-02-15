@@ -1,33 +1,32 @@
 <?php
 
-namespace App\TaskManagementModule\Listeners;
+namespace App\Listeners;
 
-use App\TaskManagementModule\Events\SubtaskStatusUpdatedEvent;
-use App\TaskManagementModule\Jobs\SendNotificationJob;
+use App\Events\SubtaskStatusUpdated;
+use App\Modules\TaskManagementModule\Jobs\SendNotificationJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Mail;
 
-
-class UpdateTaskStatusListener
+class UpdateParentTaskStatus
 {
     /**
      * Create the event listener.
      */
-    public function __construct() {}
+    public function __construct()
+    {
+        //
+    }
 
     /**
      * Handle the event.
      */
-    public function handle(SubtaskStatusUpdatedEvent $event): void
+    public function handle(SubtaskStatusUpdated $event): void
     {
         $task = $event->subtask->task;
         $subtasks = $task->subtasks;
 
         if ($subtasks->every(fn ($subtask) => $subtask->status === 'completed')) {
             $task->status = 'completed';
-
-            // dd($task->user);
 
             dispatch(new SendNotificationJob($task));
 
