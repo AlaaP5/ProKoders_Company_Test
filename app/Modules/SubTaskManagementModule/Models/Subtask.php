@@ -11,7 +11,12 @@ class Subtask extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'status', 'task_id'];
+    protected $fillable = ['details', 'status', 'task_id'];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     public function task(): BelongsTo
     {

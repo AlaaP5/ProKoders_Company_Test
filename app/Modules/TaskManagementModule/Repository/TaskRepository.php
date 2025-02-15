@@ -14,7 +14,7 @@ class TaskRepository implements TaskRepositoryInterface
     function createTask(AddUpdateTaskDto $dto): Task
     {
         $task = $this->taskModel->create($dto->toArray());
-        $this->clearTasksCache();
+        Cache::flush();
         return $task;
     }
 
@@ -44,13 +44,13 @@ class TaskRepository implements TaskRepositoryInterface
 
     function getTask(int $id): Task
     {
-        return $this->taskModel->findOrFail($id);
+        return $this->taskModel->where('id', $id)->with('subtasks')->first();
     }
 
     function deleteTask(int $id): bool
     {
         $result = $this->taskModel->findOrFail($id)->delete();
-        $this->clearTasksCache();
+        Cache::flush();
         return $result;
     }
 
@@ -58,32 +58,9 @@ class TaskRepository implements TaskRepositoryInterface
     {
         $task = $this->getTask($dto->task_id);
 
-        if ($dto->title) {
-            $task->title = $dto->title;
-        }
+        $task->update($dto->toArray());
 
-        if ($dto->description) {
-            $task->description = $dto->description;
-        }
-
-        if ($dto->user_id) {
-            $task->user_id = $dto->user_id;
-        }
-
-        $task->save();
-        $this->clearTasksCache();
+        Cache::flush();
         return $task;
-    }
-
-
-    private function getTasksCacheKey(FilterTaskDto $dto): string
-    {
-        return 'tasks_' . md5(json_encode($dto->toArray()));
-    }
-
-
-    private function clearTasksCache(): void
-    {
-        Cache::tags(['tasks'])->flush();
     }
 }
