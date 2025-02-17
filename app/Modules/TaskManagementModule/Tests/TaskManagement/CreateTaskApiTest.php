@@ -9,13 +9,12 @@ use App\Modules\TaskManagementModule\TaskManagement\Repository\TaskRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+
 class CreateTaskApiTest extends TestCase
 {
     use RefreshDatabase;
 
-
     protected TaskRepository $taskRepo;
-
 
 
     protected function setUp(): void
@@ -25,9 +24,8 @@ class CreateTaskApiTest extends TestCase
         $task = new Task();
         $this->taskRepo = new TaskRepository($task);
 
-        $this->seed(\App\Modules\SharedModule\Auth\DataBaseSeeders\RolesPermissionsSeeder::class);
+        $this->seed(\App\Modules\CommonModule\Auth\DataBaseSeeders\RolesPermissionsSeeder::class);
     }
-
 
 
     public function test_create_task_requires_authentication()
@@ -39,13 +37,12 @@ class CreateTaskApiTest extends TestCase
     }
 
 
-
     public function test_create_task_requires_admin_permission()
     {
-        $user = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
+        $user = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
         $this->actingAs($user);
 
-        $user2 = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
+        $user2 = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
         $response = $this->postJson('/api/tasks/create', [
             'title' => 'New Task',
             'description' => 'Task description',
@@ -57,15 +54,14 @@ class CreateTaskApiTest extends TestCase
     }
 
 
-
     public function test_create_task_successfully()
     {
 
-        $admin = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
+        $admin = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
         $this->actingAs($admin);
 
 
-        $user = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
+        $user = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
 
 
         $taskData = [
@@ -174,6 +170,4 @@ class CreateTaskApiTest extends TestCase
 
         $this->assertEquals('pending', $task->fresh()->status);
     }
-
-
 }

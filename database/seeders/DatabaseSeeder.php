@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Modules\SharedModule\Auth\DataBaseSeeders\RolesPermissionsSeeder;
+use App\Modules\CommonModule\Auth\DataBaseSeeders\RolesPermissionsSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

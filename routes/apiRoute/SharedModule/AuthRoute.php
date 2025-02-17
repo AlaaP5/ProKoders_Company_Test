@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use  App\Modules\SharedModule\Auth\Controller\AuthController;
+use  App\Modules\CommonModule\Auth\Controller\AuthController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->group(function () {

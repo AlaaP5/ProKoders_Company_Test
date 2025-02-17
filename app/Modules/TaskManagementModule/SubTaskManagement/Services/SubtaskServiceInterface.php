@@ -2,7 +2,7 @@
 
 namespace App\Modules\TaskManagementModule\SubtaskManagement\Services;
 
-use App\Modules\SharedModule\ResponseModels\ApiResponse;
+use App\Modules\CommonModule\ResponseModels\ApiResponse;
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\AddSubtaskDto;
 
 interface SubtaskServiceInterface

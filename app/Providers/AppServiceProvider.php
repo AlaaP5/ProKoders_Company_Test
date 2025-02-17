@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Modules\SharedModule\Auth\Repository\AuthRepository;
-use App\Modules\SharedModule\Auth\Repository\AuthRepositoryInterface;
-use App\Modules\SharedModule\Auth\Services\AuthService;
-use App\Modules\SharedModule\Auth\Services\AuthServiceInterface;
-use App\Modules\SharedModule\UserManagement\Repository\UserRepository;
-use App\Modules\SharedModule\UserManagement\Repository\UserRepositoryInterface;
-use App\Modules\SharedModule\UserManagement\Services\UserService;
-use App\Modules\SharedModule\UserManagement\Services\UserServiceInterface;
+use App\Modules\CommonModule\Auth\Repository\AuthRepository;
+use App\Modules\CommonModule\Auth\Repository\AuthRepositoryInterface;
+use App\Modules\CommonModule\Auth\Services\AuthService;
+use App\Modules\CommonModule\Auth\Services\AuthServiceInterface;
+use App\Modules\CommonModule\UserManagement\Repository\UserRepository;
+use App\Modules\CommonModule\UserManagement\Repository\UserRepositoryInterface;
+use App\Modules\CommonModule\UserManagement\Services\UserService;
+use App\Modules\CommonModule\UserManagement\Services\UserServiceInterface;
 use App\Modules\TaskManagementModule\SubtaskManagement\Repository\SubtaskRepository;
 use App\Modules\TaskManagementModule\SubtaskManagement\Repository\SubtaskRepositoryInterface;
 use App\Modules\TaskManagementModule\SubtaskManagement\Services\SubtaskService;

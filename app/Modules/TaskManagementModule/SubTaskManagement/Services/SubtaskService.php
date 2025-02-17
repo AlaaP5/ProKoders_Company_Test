@@ -3,7 +3,7 @@
 namespace App\Modules\TaskManagementModule\SubtaskManagement\Services;
 
 use App\Events\SubtaskStatusUpdated;
-use App\Modules\SharedModule\ResponseModels\ApiResponse;
+use App\Modules\CommonModule\ResponseModels\ApiResponse;
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\AddSubtaskDto;
 use App\Modules\TaskManagementModule\SubtaskManagement\Repository\SubtaskRepositoryInterface;
 use Illuminate\Support\Facades\Auth;

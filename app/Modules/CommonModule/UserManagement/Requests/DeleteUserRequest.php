@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Modules\TaskManagementModule\TaskManagement\Requests;
+namespace App\Modules\CommonModule\UserManagement\Requests;
 
 use App\Modules\CommonModule\Request\BaseRequest;
 
-class GetDeleteTaskRequest extends BaseRequest
+
+class DeleteUserRequest extends BaseRequest
 {
     protected function prepareForValidation()
     {
         $this->setRules([
-            'task_id' => 'required|integer|exists:tasks,id',
+            'user_id' => 'required|integer|exists:users,id'
         ]);
-
         $this->setMessages([
-            'task_id.required' => __('task.task_id_required'),
-            'task_id.integer' => __('task.task_id_integer'),
-            'task_id.exists' => __('task.task_id_exists'),
+            'user_id_.required' => __('auth.user_id_required'),
+            'user_id.integer' => __('auth.user_id_integer'),
+            'user_id.exists' => __('auth.user_id_exists'),
         ]);
     }
+
 
     private function setRules(array $rules)
     {

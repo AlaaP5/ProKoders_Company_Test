@@ -2,7 +2,7 @@
 
 namespace App\Modules\TaskManagementModule\TaskManagement\Requests;
 
-use App\Modules\SharedModule\Request\BaseRequest;
+use App\Modules\CommonModule\Request\BaseRequest;
 
 class UpdateTaskRequest extends BaseRequest
 {

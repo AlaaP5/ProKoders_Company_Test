@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\SharedModule\UserManagement\Controller\UserController;
+use App\Modules\CommonModule\UserManagement\Controller\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {

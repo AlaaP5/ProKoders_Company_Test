@@ -17,7 +17,7 @@ class TaskFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'status' => 'pending',
-            'user_id' => \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->id
+            'user_id' => \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->id
         ];
     }
 }

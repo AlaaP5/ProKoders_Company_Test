@@ -2,7 +2,7 @@
 
 namespace App\Modules\TaskManagementModule\TaskManagement\Services;
 
-use App\Modules\SharedModule\ResponseModels\ApiResponse;
+use App\Modules\CommonModule\ResponseModels\ApiResponse;
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\Subtask;
 use App\Modules\TaskManagementModule\TaskManagement\Models\AddUpdateTaskDto;
 use App\Modules\TaskManagementModule\TaskManagement\Models\FilterTaskDto;

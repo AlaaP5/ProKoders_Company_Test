@@ -2,7 +2,7 @@
 
 namespace App\Modules\TaskManagementModule\TaskManagement\Models;
 
-use App\Modules\SharedModule\Auth\Models\User;
+use App\Modules\CommonModule\Auth\Models\User;
 use App\Modules\TaskManagementModule\SubtaskManagement\Models\Subtask;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

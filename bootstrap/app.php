@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\SharedModule\ResponseModels\ApiResponse;
+use App\Modules\CommonModule\ResponseModels\ApiResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        
+
         $exceptions->renderable(function (AccessDeniedHttpException $e, $request) {
             return ApiResponse::error('you do not have the required authorization.')->toJsonResponse();
         });

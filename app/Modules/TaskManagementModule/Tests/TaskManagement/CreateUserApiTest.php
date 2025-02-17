@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\UserManagement;
 
-use App\Modules\SharedModule\Auth\DataBaseSeeders\RolesPermissionsSeeder;
-use App\Modules\SharedModule\Auth\Models\User;
-use App\Modules\SharedModule\UserManagement\Models\AddUpdateUserDto;
+use App\Modules\CommonModule\Auth\DataBaseSeeders\RolesPermissionsSeeder;
+use App\Modules\CommonModule\Auth\Models\User;
+use App\Modules\CommonModule\UserManagement\Models\AddUpdateUserDto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -29,14 +29,14 @@ class CreateUserApiTest extends TestCase
 
     public function test_create_user_requires_proper_permission(): void
     {
-        $user = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
+        $user = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('employee');
         $this->actingAs($user);
         $this->postJson('/api/users/create', [])->assertStatus(200);
     }
 
     public function test_create_user_successfully(): void
     {
-        $admin = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
+        $admin = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
         $this->actingAs($admin);
 
         $dto = new AddUpdateUserDto([
@@ -58,7 +58,7 @@ class CreateUserApiTest extends TestCase
 
     public function test_create_user_fails_due_to_invalid_data_name_column(): void
     {
-        $admin = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
+        $admin = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
         $this->actingAs($admin);
 
         $this->postJson('/api/users/create', [
@@ -72,7 +72,7 @@ class CreateUserApiTest extends TestCase
 
     public function test_create_user_fails_due_to_invalid_data_password_column(): void
     {
-        $admin = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
+        $admin = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()->create()->assignRole('admin');
         $this->actingAs($admin);
 
         $this->postJson('/api/users/create', [
@@ -86,7 +86,7 @@ class CreateUserApiTest extends TestCase
 
     public function test_create_user_fails_due_to_invalid_data_email_column(): void
     {
-        $admin = \App\Modules\SharedModule\UserManagement\DataBase\Factories\UserFactory::new()
+        $admin = \App\Modules\CommonModule\UserManagement\DataBase\Factories\UserFactory::new()
         ->create([
             'name' => 'ali',
             'email' => 'email@.com',
